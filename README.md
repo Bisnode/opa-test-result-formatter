@@ -1,0 +1,1 @@
+# opa-test-result-formatter
