@@ -1,0 +1,1 @@
+rootProject.name = "opa-test-result-formatter"
