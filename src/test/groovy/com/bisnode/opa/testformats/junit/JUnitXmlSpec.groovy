@@ -8,7 +8,9 @@ import javax.xml.XMLConstants
 import javax.xml.transform.stream.StreamSource
 import javax.xml.validation.SchemaFactory
 
+@SuppressWarnings("SpaceAfterClosingBrace")
 class JUnitXmlSpec extends Specification {
+
     static File JUNIT_XSD = new File('src/test/resources/junit.xsd')
     static File SINGLE_PACKAGE = new File("src/test/resources/single-testsuite.json")
     static File SINGLE_PACKAGE_NO_FAILS = new File("src/test/resources/single-testsuite-nofails.json")
@@ -26,7 +28,7 @@ class JUnitXmlSpec extends Specification {
             noExceptionThrown()
     }
 
-    void 'should validate against JUnit xsd'() {
+    void 'should validate single suite against JUnit xsd'() {
         given:
             def validator = SchemaFactory
                     .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
@@ -35,6 +37,20 @@ class JUnitXmlSpec extends Specification {
 
         when:
             validator.validate(new StreamSource(new StringReader(JUnitXml.from(singleTestSuite).asXmlString())))
+
+        then:
+            noExceptionThrown()
+    }
+
+    void 'should validate multiple suites against JUnit xsd'() {
+        given:
+            def validator = SchemaFactory
+                    .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
+                    .newSchema(JUNIT_XSD)
+                    .newValidator()
+
+        when:
+            validator.validate(new StreamSource(new StringReader(JUnitXml.from(multipleTestSuites).asXmlString())))
 
         then:
             noExceptionThrown()
@@ -136,7 +152,10 @@ class JUnitXmlSpec extends Specification {
             String xmlString = JUnitXml.from(multipleTestSuites).asXmlString()
             def outputXml = xmlSlurper.parseText(xmlString)
         then:
-            outputXml.testsuite.find { suite -> suite['@name'] == 'data.kubernetes.authz' }.children().each { child -> child.className == 'tbac-policy-test.rego' }
-            outputXml.testsuite.find { suite -> suite['@name'] == 'data.http.request.authz' }.children().each { child -> child.className == 'src/test/resources/opa/policies/policies-test.rego' }
+            outputXml.testsuite.find { suite -> suite['@name'] == 'data.kubernetes.authz' }.children()
+                    .each { child -> child.className == 'tbac-policy-test.rego' }
+            outputXml.testsuite.find { suite -> suite['@name'] == 'data.http.request.authz' }.children()
+                    .each { child -> child.className == 'src/test/resources/opa/policies/policies-test.rego' }
     }
+
 }

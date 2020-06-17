@@ -17,12 +17,12 @@ class Suite {
     }
 
     @JacksonXmlProperty(isAttribute = true)
-    public String getName() {
+    String getName() {
         return name;
     }
 
     @JacksonXmlProperty(localName = "testcase")
-    public List<TestCase> getTestCases() {
+    List<TestCase> getTestCases() {
         return testCases;
     }
 

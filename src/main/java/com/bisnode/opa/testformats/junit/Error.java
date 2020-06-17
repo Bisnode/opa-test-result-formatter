@@ -22,7 +22,7 @@ class Error {
         return type;
     }
 
-    public static Error fromOpaError(OpaError error) {
+    static Error fromOpaError(OpaError error) {
         return new Error(error.getMessage(), error.getCode());
     }
 }

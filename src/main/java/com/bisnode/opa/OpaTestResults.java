@@ -7,7 +7,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class OpaTestResults {
 
@@ -15,6 +14,14 @@ public class OpaTestResults {
 
     private final List<OpaTestCase> testCases;
 
+    /**
+     * Factory method creating {@link OpaTestResults} instance out of OPA's test JSON report.
+     * Report is produced by {@code opa test --format=json} command.
+     *
+     * @param json OPA test report in JSON format.
+     * @return {@link OpaTestResults} containing parsed test results.
+     * @throws JsonProcessingException Thrown by {@link ObjectMapper}.
+     */
     public static OpaTestResults fromJson(@Nullable String json) throws JsonProcessingException {
         if (isEmpty(json)) {
             return new OpaTestResults(Collections.emptyList());
@@ -27,14 +34,13 @@ public class OpaTestResults {
         return json == null || json.isBlank() || json.trim().equals("null");
     }
 
-    public OpaTestResults(List<OpaTestCase> testCases) {
+    private OpaTestResults(List<OpaTestCase> testCases) {
         this.testCases = testCases;
     }
 
-    public List<String> getPackages() {
-        return testCases.stream().map(OpaTestCase::getPackage).distinct().collect(Collectors.toList());
-    }
-
+    /**
+     * @return {@link List} of {@link OpaTestCase} contained this {@link OpaTestResults}.
+     */
     public List<OpaTestCase> getTestCases() {
         return testCases;
     }

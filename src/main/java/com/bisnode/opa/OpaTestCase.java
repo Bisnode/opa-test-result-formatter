@@ -1,6 +1,5 @@
 package com.bisnode.opa;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jetbrains.annotations.Nullable;
@@ -17,12 +16,13 @@ public class OpaTestCase {
     @Nullable
     private final OpaError error;
 
-    public OpaTestCase(@JsonProperty("location") Location location,
-                @JsonProperty("package") String pkg,
-                @JsonProperty("name") String name,
-                @JsonProperty("duration") long duration,
-                @JsonProperty("fail") @Nullable Boolean fail,
-                @JsonProperty("error") @Nullable OpaError error) {
+
+    OpaTestCase(@JsonProperty("location") Location location,
+                       @JsonProperty("package") String pkg,
+                       @JsonProperty("name") String name,
+                       @JsonProperty("duration") long duration,
+                       @JsonProperty("fail") @Nullable Boolean fail,
+                       @JsonProperty("error") @Nullable OpaError error) {
         this.location = location;
         this.pkg = pkg;
         this.name = name;
@@ -31,27 +31,45 @@ public class OpaTestCase {
         this.error = error;
     }
 
+    /**
+     * @return Test location.
+     */
     public Location getLocation() {
         return location;
     }
 
+    /**
+     * @return Test package.
+     */
     public String getPackage() {
         return pkg;
     }
 
+    /**
+     * @return Test name.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return Test duration in nanoseconds.
+     */
     public long getDuration() {
         return duration;
     }
 
+    /**
+     * @return {@code Boolean.TRUE} if the test failed, {@code null} otherwise.
+     */
     @Nullable
     public Boolean getFail() {
         return fail;
     }
 
+    /**
+     * @return {@link OpaError} instance if test resulted in errors, {@code null} otherwise.
+     */
     @Nullable
     public OpaError getError() {
         return error;

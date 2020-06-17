@@ -26,10 +26,12 @@ public class JUnitXml {
 
     private final List<Suite> suites;
 
-    public JUnitXml(List<Suite> suites) {
-        this.suites = suites;
-    }
-
+    /**
+     * Factory method for creating {@link JUnitXml} instance from {@link OpaTestResults}.
+     *
+     * @param opaTestResults Test results to convert.
+     * @return {@link JUnitXml} instance.
+     */
     public static JUnitXml from(OpaTestResults opaTestResults) {
         return new JUnitXml(toSuites(opaTestResults));
     }
@@ -49,36 +51,43 @@ public class JUnitXml {
                 );
     }
 
+    private JUnitXml(List<Suite> suites) {
+        this.suites = suites;
+    }
+
+    /**
+     * Returns valid formatted JUnit XML as string.
+     *
+     * @return String containing JUnit XML report.
+     * @throws JsonProcessingException Thrown by {@link XmlMapper}.
+     */
     public String asXmlString() throws JsonProcessingException {
         return XML_MAPPER.writeValueAsString(this);
     }
 
     @JacksonXmlProperty(localName = "testsuite")
-    public List<Suite> getSuites() {
+    List<Suite> getSuites() {
         return suites;
     }
 
     @JacksonXmlProperty(isAttribute = true)
-    public long getFailures() {
+    long getFailures() {
         return suites.stream().map(Suite::getFailures).reduce(0L, Long::sum);
     }
 
     @JacksonXmlProperty(isAttribute = true)
-    public long getErrors() {
+    long getErrors() {
         return suites.stream().map(Suite::getErrors).reduce(0L, Long::sum);
     }
 
     @JacksonXmlProperty(isAttribute = true)
-    public long getTests() {
+    long getTests() {
         return suites.stream().map(Suite::getTests).reduce(0L, Long::sum);
     }
 
     @JacksonXmlProperty(isAttribute = true)
-    public String getTime() {
+    String getTime() {
         return TimeFormatter.nanosToSeconds(suites.stream().map(Suite::getTimeNanos).reduce(0L, Long::sum));
     }
-
-
-
 
 }
