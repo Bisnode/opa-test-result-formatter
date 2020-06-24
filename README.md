@@ -41,4 +41,4 @@ String summary = opaVerboseSummary.summary();
 
 ---
 
-<small> Made with :heart: @ Bisnode</small>
+<small>Made with :heart: @ [Bisnode](https://www.bisnode.com/) </small>
