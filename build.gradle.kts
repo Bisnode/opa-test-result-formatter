@@ -6,6 +6,8 @@ version = "0.0.1"
 group = "com.bisnode.opa"
 
 plugins {
+    checkstyle
+    codenarc
     groovy
     java
     `java-library`
@@ -38,13 +40,16 @@ tasks.test {
     useJUnitPlatform()
 }
 
+configure<CodeNarcExtension> {
+    reportFormat = "console"
+}
+
 tasks.javadoc {
     source = sourceSets["main"].allJava
 }
 
 tasks.wrapper {
     version = "6.3"
-    distributionType = DistributionType.ALL
 }
 
 publishing {

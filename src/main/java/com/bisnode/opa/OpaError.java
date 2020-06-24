@@ -17,14 +17,23 @@ public class OpaError {
         this.location = location;
     }
 
+    /**
+     * @return Opa test error code.
+     */
     public String getCode() {
         return code;
     }
 
+    /**
+     * @return Opa test error message.
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * @return Opa test location.
+     */
     public Location getLocation() {
         return location;
     }

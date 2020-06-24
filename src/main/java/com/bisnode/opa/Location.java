@@ -17,14 +17,23 @@ public class Location {
         this.col = col;
     }
 
+    /**
+     * @return File name containing test case.
+     */
     public String getFile() {
         return file;
     }
 
+    /**
+     * @return Row with test case.
+     */
     public long getRow() {
         return row;
     }
 
+    /**
+     * @return Column at which case starts.
+     */
     public long getCol() {
         return col;
     }

@@ -32,38 +32,38 @@ class TestCase {
     }
 
     @JacksonXmlProperty(isAttribute = true)
-    public String getName() {
+    String getName() {
         return name;
     }
 
     @JacksonXmlProperty(isAttribute = true, localName = "classname")
-    public String getClassName() {
+    String getClassName() {
         return className;
     }
 
     @JacksonXmlProperty(isAttribute = true)
-    public String getTime() {
+    String getTime() {
         return TimeFormatter.nanosToSeconds(time);
     }
 
     @JsonIgnore
-    public long getTimeNanos() {
+    long getTimeNanos() {
         return time;
     }
 
     @JsonIgnore
-    public boolean isFailure() {
+    boolean isFailure() {
         return failure;
     }
 
     //that's a nasty hack
     @JacksonXmlProperty(localName = "failure")
-    public String getFailure() {
+    String getFailure() {
         return isFailure() ? "" : null;
     }
 
     @JacksonXmlProperty(localName = "error")
-    public Error getError() {
+    Error getError() {
         return error;
     }
 
