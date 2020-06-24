@@ -1,22 +1,24 @@
 # opa-test-result-formatter
 
-Single-purpose library to help transform the output of `opa test` into different formats, like JUnit XML.
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.bisnode.opa/opa-test-result-formatter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.bisnode.opa/test-result-formatter) ![build](https://github.com/Bisnode/opa-test-result-formatter/workflows/build/badge.svg)
+
+Single-purpose library to help transform the output of `opa test` into different formats, like JUnit XML or `opa test -v` summary.
 
 ## Using the library
 
-Import the library
-
 ### Gradle
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.bisnode.opa/opa-test-result-formatter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.bisnode.opa/test-result-formatter)
 ```
-implementation("com.bisnode.opa:opa-test-result-formatter:0.0.1")
+implementation("com.bisnode.opa:opa-test-result-formatter:{version}")
 ```
-### Maven
 
+### Maven
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.bisnode.opa/opa-test-result-formatter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.bisnode.opa/test-result-formatter)
 ```
 <dependency>
     <groupId>com.bisnode.opa</groupId>
-    <artifactId>test-result-formatter</artifactId>
-    <version>0.0.1</version>
+    <artifactId>opa-test-result-formatter</artifactId>
+    <version>{version}</version>
 </dependency>
 ```
 
@@ -27,3 +29,16 @@ String testResultsJson = "..."; // output of opa test --format=json
 OpaTestResults testResults = OpaTestResults.fromJson(testResultsJson);
 JUnitXml junitXml = JUnitXML.from(testResults);
 ```
+
+### Converting to `opa test -v` format
+
+```java
+String testResultsJson = "..."; // output of opa test --format=json
+OpaTestResults testResults = OpaTestResults.fromJson(testResultsJson);
+OpaVerboseSummary opaVerboseSummary = OpaVerboseSummary.of(testResults);
+String summary = opaVerboseSummary.summary();
+```
+
+---
+
+<small>Made with :heart: @ [Bisnode](https://www.bisnode.com/) </small>

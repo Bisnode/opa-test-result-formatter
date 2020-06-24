@@ -56,7 +56,13 @@ class TestCase {
         return failure;
     }
 
-    //that's a nasty hack
+    // If the test has failed there needs to be a child <failure></failure> in JUnit XML.
+    // Otherwise no children should be present. The only way of achieving this behavior
+    // using Jackson XML Mapper was to emulate an empty string property called "failure"
+    // (so it would create <failure></failure> with no text inside) and return null when
+    // the test passed. The mapper is configured to ignore null values during serialization,
+    // so when null is returned for "failure" it doesn't append any children to "testcase"
+    // and just serializes it as <testcase .... />.
     @JacksonXmlProperty(localName = "failure")
     String getFailure() {
         return isFailure() ? "" : null;
