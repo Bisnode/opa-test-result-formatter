@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [//]: # (### Changed)
 [//]: # (### Removed)
 
+## [0.1.0] - 2020-06-24
+### Added
+- New output format, similar to `opa test -v` command
+
 ## [0.0.1] - 2020-06-20
 ### Added
 - First release, including JUnit XML formatter.
