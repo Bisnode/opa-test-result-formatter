@@ -4,6 +4,10 @@
 
 Single-purpose library to help transform the output of `opa test` into different formats, like JUnit XML or `opa test -v` summary.
 
+## Prerequisites
+
+- Java 8 or higher
+
 ## Using the library
 
 ### Gradle

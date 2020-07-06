@@ -1,7 +1,7 @@
-import java.util.*
-import org.gradle.api.JavaVersion.VERSION_11
+import java.util.Base64
+import org.gradle.api.JavaVersion.VERSION_1_8
 
-version = "0.1.0"
+version = "0.1.1"
 group = "com.bisnode.opa"
 
 plugins {
@@ -29,8 +29,8 @@ repositories {
 }
 
 java {
-    sourceCompatibility = VERSION_11
-    targetCompatibility = VERSION_11
+    sourceCompatibility = VERSION_1_8
+    targetCompatibility = VERSION_1_8
     withJavadocJar()
     withSourcesJar()
 }

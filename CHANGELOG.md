@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [//]: # (### Changed)
 [//]: # (### Removed)
 
+## [0.1.1] - 2020-07-06
+### Changed
+- Target Java version to 8 
+
 ## [0.1.0] - 2020-06-24
 ### Added
 - New output format, similar to `opa test -v` command
