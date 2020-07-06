@@ -1,4 +1,4 @@
-import java.util.*
+import java.util.Base64
 import org.gradle.api.JavaVersion.VERSION_1_8
 
 version = "0.1.1"
