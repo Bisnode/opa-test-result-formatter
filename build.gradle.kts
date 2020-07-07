@@ -1,7 +1,7 @@
 import java.util.Base64
 import org.gradle.api.JavaVersion.VERSION_1_8
 
-version = "0.1.1"
+version = "0.1.2"
 group = "com.bisnode.opa"
 
 plugins {
@@ -48,7 +48,7 @@ tasks.javadoc {
 }
 
 tasks.wrapper {
-    version = "6.3"
+    version = "6.4.1"
 }
 
 publishing {

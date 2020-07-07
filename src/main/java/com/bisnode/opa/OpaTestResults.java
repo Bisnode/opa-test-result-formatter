@@ -31,7 +31,7 @@ public class OpaTestResults {
     }
 
     private static boolean isEmpty(@Nullable String json) {
-        return json == null || json.isBlank() || json.trim().equals("null");
+        return json == null || json.trim().length() == 0 || json.trim().equals("null");
     }
 
     private OpaTestResults(List<OpaTestCase> testCases) {
